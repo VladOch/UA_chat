@@ -1,0 +1,24 @@
+import firebase from 'firebase/app'
+
+export default {
+   state: {
+      user: null
+   },
+   mutations: {
+
+   },
+   actions: {
+      async registerUser({commit}, payload) {
+         const user = await firebase.auth().createUserWithEmailAndPassword(email, password)
+         
+      }
+   },
+   getters: {
+      user(state) {
+         return state.user
+      },
+      checkUser(state) {
+         return state.user !== null
+      }
+   }
+}

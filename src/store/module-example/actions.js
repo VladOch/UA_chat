@@ -1,2 +1,9 @@
-export function someAction (/* context */) {
+const actions = {
+   actions: {
+
+   }
+}
+
+export {
+   actions,
 }
