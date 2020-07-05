@@ -8,7 +8,7 @@ export default {
 
    },
    actions: {
-      async registerUser({commit}, payload) {
+      async registerUser({commit}, {email, password}) {
          const user = await firebase.auth().createUserWithEmailAndPassword(email, password)
          
       }

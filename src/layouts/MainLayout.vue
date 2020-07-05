@@ -1,40 +1,34 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
+      <q-toolbar class="row justify-between">
+         <q-btn 
+         flat
+         dense
+         v-go-back.single
+         color="white" 
+         icon="arrow_back" 
+         label="Back" 
+         v-if="this.$route.fullPath == '/chat'"
+         />
 
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title class="absolute-center">
+         {{title}}
         </q-toolbar-title>
-
+        <router-link to="/auth">
+        <q-btn 
+         flat
+         dense
+         @click="loginRouter"
+         color="white" 
+         icon="login" 
+         label="Login" 
+         v-if="this.$route.fullPath !== '/auth'"
+         class="col-md-4 offset-md-4"
+         />
+        </router-link>
       </q-toolbar>
     </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-1"
-    >
-      <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
-          Nav-bar
-        </q-item-label>
-        
-      </q-list>
-    </q-drawer>
-
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -42,13 +36,21 @@
 </template>
 
 <script>
+import routes from '../router/routes';
 
 export default {
-  name: 'MainLayout',
-  data () {
-    return {
-      leftDrawerOpen: false,
-      
+  computed: {
+    title() {
+      console.log(this.$route)
+    const RoutePathTitle = 
+    (this.$route.path == '/') ? 'Main page' :
+    (this.$route.path == '/auth') ? 'Login page' : 'Chat page';
+       return RoutePathTitle
+    }
+  },  
+  methods: {
+    loginRouter() {
+      routes.push('/login')
     }
   }
 }
